@@ -11,20 +11,13 @@ class ProductController extends BaseController
 	public function index()
 	{
 		$products = $this->productModel->getAll();
-		return $this->view('frontend.products.index', [
+		return $this->view('home.products.index', [
 			'products' => $products
 		]);
 	}
-
-	public function show()
-	{
-		echo $this->productModel->findById(1);
-		echo __METHOD__;
-	}
-
 	public function addToCart(){
 		echo "
-
+			
 			<script>history.back()</script>
 			";
 	}

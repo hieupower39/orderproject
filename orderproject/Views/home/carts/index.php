@@ -8,13 +8,15 @@
   
 </head>
 <body>
-    <?php include "./header.php"; ?>
+    <?php include "./home/header.php"; ?>
   <div class="cart" id="cart" style="min-height: 350px;">
     
   </div>
   <hr>
-  <?php include "./footer.php";?>
+  <?php include "./home/footer.php";?>
+  
   <script>
+      loginStatic = <?php echo $login ?>;
       show(<?php echo json_encode($products); ?>);
   </script>
 </body>

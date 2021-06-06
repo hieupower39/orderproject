@@ -1,7 +1,10 @@
 <?php   
     $auth="";
+    $login=0;
     if(isset($_SESSION["auth"]))
     $auth=$_SESSION["auth"];
+    if(isset($_SESSION["user"]))
+    $login=1;
 ?>
 
 
@@ -18,18 +21,22 @@
 </head>
 <body>
   <header>
-    <div>
-      <div>
+    <div class="row">
+      <div class="col-md-6">
         <a class="navbar-brand" href="index.php">
           <img src="image/Brand.jpg" alt="" height="50">
         </a>
+        
+       
+      </div>
+      <div class="flex-header col-md-6"> 
         <?php
             if(!isset($_SESSION["user"]))
                 include "login.php";
             else
                 include "logout.php";
         ?>
-      </div>
+        </div>
     </div>
   </header>
   <!-- Navigation -->
@@ -52,19 +59,10 @@
           <li class="nav-item">
             <a class="nav-link" href="index.php?controller=product">Sản phẩm</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Dịch vụ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Đội ngũ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Liên hệ</a>
-          </li>
         </ul>
       </div>
       <div class="nav-item ">
-        <a class="nav-icon" id="nav-icon" href="./index.php?controller=cart">
+        <a class="nav-icon" id="nav-icon" href="index.php?controller=cart">
 
         </a>
 

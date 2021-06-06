@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+
 <footer>
     <div class="container-fluid padding">
       <div class="row text-center">
@@ -21,10 +14,9 @@
     </div>
   </div>
   </footer>
-  <script src="products.js"></script>
-  <script src="cart.js"></script>
-  <script src="products.js"></script>
-    <script src="cart.js"></script>
+  <script src="./javascript/products.js"></script>
+  <script src="./javascript/cart.js"></script>
+  
       <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -38,8 +30,6 @@
     <script> 
     cartAlert();
     </script>
-</body>
-</html>
 
 <?php
     unset($_SESSION["auth"]);

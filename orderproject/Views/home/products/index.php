@@ -9,7 +9,7 @@
   <title>HOME Fitness & Yoga Center</title>  
 </head>
 <body>
-  <?php include "./header.php";?>
+  <?php include "./home/header.php";?>
   <div class="container-fluid main">
     <h1>Sản phẩm</h1>
     <div class="container-fluid padding p-3 my-3 border" >
@@ -26,7 +26,8 @@
     </div>
   </div>
   <hr>
-  <?php include "./footer.php";?>
+  <?php include "./home/footer.php";?>
+  
   <script> 
     init(<?php echo json_encode($products); ?>);
   </script>

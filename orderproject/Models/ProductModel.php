@@ -10,8 +10,4 @@ class ProductModel extends BaseModel{
     {
         return __METHOD__;
     } 
-    public function delete()
-    {
-        return __METHOD__;
-    }
 }

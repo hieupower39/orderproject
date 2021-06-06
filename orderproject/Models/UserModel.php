@@ -13,4 +13,5 @@ class UserModel extends BaseModel
     public function findUser($username, $pwd){
         return $this->check($username, $pwd);
     }
+
 }

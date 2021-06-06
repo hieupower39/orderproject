@@ -50,6 +50,4 @@ function addTicket(listTicket){
         document.getElementById("list-ticket").innerHTML+=ticket;
     }
 }
-addTicket(listTicket);
-
-
+addTicket(listTicket);  

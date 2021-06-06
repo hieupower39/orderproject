@@ -1,5 +1,5 @@
 var keyLocalStorageCartItem = 'listCartItem';
-
+var loginStatic;
 function show(json_products){
   products=json_products;
   showListItemInCart();
@@ -129,10 +129,21 @@ function updateCart(idProduct, amount){
               html+=cartItemToHTML(listItemInCart[index]);
           }
           html+=`
+          <div class="information">
+          <form>
+            <label for="name">Họ và tên:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="address">Địa chỉ:</label><br>
+            <input type="text" id="address" name="address"><br>
+            <label for="phone">Số điện thoại:</label><br>
+            <input type="text" id="phone" name="phone"><br>
+          </form>
+          </div>
           <div class="checkout">
+          
             <p id="checkout"><b>Tổng tiền: </b>${formatMoney(money)} VNĐ</p>
             <div>
-              <button type="button" class="btn btn-primary btn-lg" onclick="checkOut()">Thanh toán</button>
+              <button type="button" class="btn btn-primary btn-lg" onclick="checkOut();">Thanh toán</button>
             </div>
           </div>`;
           return html;
@@ -165,21 +176,45 @@ function updateCart(idProduct, amount){
         document.getElementById("cart").innerHTML=`<h3>Không có sản phẩm nào trong giỏ hàng</h3>`;
       }
       function checkOut(){
-        var listItemInCart = new Array();
-        localStorage.removeItem(keyLocalStorageCartItem);
-        showListItemInCart();
-        alert("Bạn đã thanh toán thành công");
+        
+        if(loginStatic){
+          var name = document.getElementById("name").value;
+          var address = document.getElementById("address").value;
+          var phone = document.getElementById("phone").value;
+          var str_json = localStorage.getItem(keyLocalStorageCartItem);
+          var xhttp = new XMLHttpRequest();
+          var date=getDate();
+          // xhttp.onreadystatechange = function() {
+          //   if (this.readyState == 4 && this.status == 200) {
+          //     alert(this.responseText);
+          //   }
+          // };
+          
+          xhttp.open("POST", "index.php?controller=cart&action=checkout", true);
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.send(`json=${str_json}&name=${name}&address=${address}&phone=${phone}&date=${date}`);
+          var listItemInCart = new Array();
+          localStorage.removeItem(keyLocalStorageCartItem);
+          showListItemInCart();
+          
+          alert("Bạn đã thanh toán thành công");
+        }
+          
+        else{
+          alert("Bạn cần đăng nhập");
+        }
+          
         cartAlert();
       }
-      function updateMoney(){
-        money=0;
-        var listItemInCart = getListItemInCart();
-        for(var index=0; index < listItemInCart.length; index++){
-              var cartItem = listItemInCart[index];
-              var item = findProductByID(cartItem.idProduct);
-              money+=cartItem.amount*item.cost;
-          }
-      }
+function updateMoney(){
+    money=0;
+    var listItemInCart = getListItemInCart();
+    for(var index=0; index < listItemInCart.length; index++){
+        var cartItem = listItemInCart[index];
+        var item = findProductByID(cartItem.idProduct);
+        money+=cartItem.amount*item.cost;
+    }
+  }
 function cartAlert(){
    var len = getListItemInCart().length;
    if(len>0)
@@ -201,4 +236,17 @@ function findProductByID(idProduct){
   product.cost=pro.product_cost;
   product.type=pro.product_t;
   return product;
+}
+
+function getDate(){
+  var date = new Date();
+  var str = reString(date.getHours())+":"+reString(date.getMinutes())
+  +" "+reString(date.getDay())+"-"+reString((date.getMonth()+1))+"-"+date.getFullYear();
+  return str;
+}
+
+function reString(num){
+  if(num<10)
+    return "0"+num;
+  return num;
 }
